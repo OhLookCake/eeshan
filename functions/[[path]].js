@@ -1,30 +1,38 @@
-export async function onRequest(context) {
-  const { request, next } = context;
-  const url = new URL(request.url);
-  const pathSegments = url.pathname.split('/').filter(Boolean);
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    const pathParts = url.pathname.split('/');
+    
+    // The first segment after the leading slash (e.g., 'foo' from '/foo/page')
+    const projectSlug = pathParts[1];
 
-  // 1. Your allowed projects
-  const MY_PROJECTS = ['vibewho', 'hodorle', 'sagainsth', 'becausefuckthat', 'thingsinrings'];
+    // Mapping of path slugs to their respective Cloudflare Pages domains
+    const projectMap = {
+      'hodorle': 'hodorle.pages.dev',
+      'vibewho': 'vibewho.pages.dev',
+      'startups': 'sagainsth.com'
+    };
 
-  const projectName = pathSegments[0];
+    if (projectSlug && projectMap[projectSlug]) {
+      const targetDomain = projectMap[projectSlug];
+      
+      // Reconstruct the path for the sub-project
+      // eeshan.pages.dev/foo/blah -> foo.pages.dev/blah
+      const remainingPath = '/' + pathParts.slice(2).join('/');
+      const targetUrl = new URL(remainingPath + url.search, `https://${targetDomain}`);
 
-  // 2. If it's a project path, proxy it
-  if (projectName && MY_PROJECTS.includes(projectName)) {
-    const targetBase = `https://${projectName}.pages.dev`;
-    const remainingPath = '/' + pathSegments.slice(1).join('/');
-    const targetURL = new URL(remainingPath, targetBase);
+      const response = await fetch(targetUrl, {
+        headers: request.headers,
+        method: request.method,
+        body: request.body,
+        redirect: 'follow'
+      });
 
-    // Fetch from the other project
-    const response = await fetch(targetURL.toString(), request);
-
-    // Fallback if the sub-project returns a 404
-    if (response.status === 404) {
-      return next();
+      // Optional: Handle 404s from sub-projects or return the response directly
+      return response;
     }
 
-    return response;
+    // Fallback: Serve the main site eeshan.pages.dev
+    return fetch(request);
   }
-
-  // 3. Otherwise, serve the static files from your main repo
-  return next();
-}
+};
