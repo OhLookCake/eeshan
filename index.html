@@ -3,11 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hey</title>
+    <title>eeshan's projects</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Foo</h1>
-    <p>Lorem Ipsum Stub</p>
+    <header>
+        <h1>eeshan's projects</h1>
+        <nav>
+            <button class="view-btn active" data-view="category">Category</button>
+            <button class="view-btn" data-view="timeline">Timeline</button>
+            <button class="theme-btn" onclick="document.body.classList.toggle('dark');this.textContent=document.body.classList.contains('dark')?'light':'dark'">dark</button>
+        </nav>
+    </header>
+    <main id="projects"></main>
+    <script>
+        // Add projects here: { name, url, date, category, byline }
+        var projects = [
+            { name: "Vibe Who", url: "https://vibewho.pages.dev", date: "2026-04-24", category: "social-games", byline: "A guessing game based on vibes and stereotypes" },
+            { name: "Chrono Beats", url: "https://chronobeats.pages.dev", date: "2026-02-10", category: "art", byline: "Generative rhythms driven by the clock" },
+            { name: "Data Drip", url: "https://datadrip.pages.dev", date: "2025-11-03", category: "data", byline: "Slow-feed dashboard for personal metrics" },
+            { name: "Party Pulse", url: "https://partypulse.pages.dev", date: "2025-08-17", category: "social-games", byline: "Real-time party mood tracker" },
+            { name: "Pixel Drift", url: "https://pixeldrift.pages.dev", date: "2025-05-22", category: "art", byline: "Pixels that wander and decay over time" },
+            { name: "Stat Spark", url: "https://statspark.pages.dev", date: "2025-02-14", category: "data", byline: "Quick-glance statistical snapshots" },
+        ];
+
+        var container = document.getElementById('projects');
+        var buttons = document.querySelectorAll('.view-btn');
+
+        function renderTimeline() {
+            var sorted = projects.slice().sort(function(a, b) { return b.date.localeCompare(a.date); });
+            container.innerHTML = '<ul class="timeline">' +
+                sorted.map(function(p) {
+                    return '<li><span class="date">' + p.date + '</span><a href="' + p.url + '">' + p.name + '</a><span class="byline">' + p.byline + '</span></li>';
+                }).join('') + '</ul>';
+        }
+
+        function renderCategory() {
+            var groups = {};
+            projects.forEach(function(p) {
+                (groups[p.category] = groups[p.category] || []).push(p);
+            });
+            container.innerHTML = Object.keys(groups).sort().map(function(cat) {
+                var items = groups[cat].slice().sort(function(a, b) { return b.date.localeCompare(a.date); });
+                return '<section><h2>' + cat + '</h2><ul class="category-list">' +
+                    items.map(function(p) {
+                        return '<li><a href="' + p.url + '">' + p.name + '</a><span class="byline">' + p.byline + '</span></li>';
+                    }).join('') + '</ul></section>';
+            }).join('');
+        }
+
+        function setView(view) {
+            buttons.forEach(function(b) { b.classList.toggle('active', b.dataset.view === view); });
+            if (view === 'timeline') renderTimeline(); else renderCategory();
+        }
+
+        buttons.forEach(function(b) { b.addEventListener('click', function() { setView(b.dataset.view); }); });
+        setView('category');
+    </script>
 </body>
 </html>
