@@ -1,7 +1,7 @@
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  const pathParts = url.pathname.split('/').filter(Boolean); // Remove empty strings
-  const projectSlug = pathParts[0]; // Now 'foo' is at index 0
+  const pathParts = url.pathname.split('/').filter(Boolean);
+  const projectSlug = pathParts[0];
 
   const projectMap = {
     'hodorle': 'hodorle.pages.dev',
@@ -10,15 +10,24 @@ export async function onRequest(context) {
   };
 
   if (projectSlug && projectMap[projectSlug]) {
+    // Force trailing slash redirect
+    if (url.pathname === `/${projectSlug}`) {
+      return Response.redirect(`${url.origin}/${projectSlug}/`, 301);
+    }
+
     const targetDomain = projectMap[projectSlug];
     const remainingPath = '/' + pathParts.slice(1).join('/');
     const targetUrl = new URL(remainingPath + url.search, `https://${targetDomain}`);
 
-    console.log(`Proxying to: ${targetUrl.toString()}`);
+    // Clone headers to avoid mutating the original request
+    const newHeaders = new Headers(context.request.headers);
+
+    // CRITICAL: Set the Host header to the target domain
+    newHeaders.set('Host', targetDomain);
 
     return fetch(targetUrl, {
-      headers: context.request.headers,
-      method: context.request.method,
+      headers: newHeaders,
+      method: context.request.headers.get('Method') || 'GET',
       redirect: 'follow'
     });
   }
