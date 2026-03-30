@@ -7,7 +7,7 @@ export async function onRequest(context) {
     'hodorle': 'hodorle.pages.dev',
     'vibewho': 'vibewho.pages.dev',
     'startups': 'sagainsth.com',
-    'letters-game': 'letters-game.pages.dev'
+    'letters-practice': 'letters-practice.pages.dev'
   };
 
   if (projectSlug && projectMap[projectSlug]) {
