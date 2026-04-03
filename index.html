@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eeshan's projects</title>
     <link rel="stylesheet" href="style.css">
+    <script>if(localStorage.getItem('theme')!=='light')document.documentElement.className='dark'</script>
 </head>
 <body>
     <header>
@@ -12,7 +13,7 @@
         <nav>
             <button class="view-btn active" data-view="category">Category</button>
             <button class="view-btn" data-view="timeline">Timeline</button>
-            <button class="theme-btn" onclick="document.body.classList.toggle('dark');this.textContent=document.body.classList.contains('dark')?'light':'dark'">dark</button>
+            <button class="theme-btn" onclick="document.documentElement.classList.toggle('dark');var d=document.documentElement.classList.contains('dark');this.textContent=d?'light':'dark';localStorage.setItem('theme',d?'dark':'light')">dark</button>
         </nav>
     </header>
     <main id="projects"></main>
@@ -57,6 +58,7 @@
 
         buttons.forEach(function(b) { b.addEventListener('click', function() { setView(b.dataset.view); }); });
         setView('category');
+        if(localStorage.getItem('theme')!=='light') document.querySelector('.theme-btn').textContent='light';
     </script>
     <script data-goatcounter="https://cakester.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>

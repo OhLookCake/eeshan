@@ -17,8 +17,8 @@
     --link-hover: #1a0f0a;
 }
 
-body.dark {
-    --bg: #1a1210;
+.dark {
+    --bg: #0f1520;
     --text: #e8d8d0;
     --muted: #7a5e50;
     --border: #2e2220;
