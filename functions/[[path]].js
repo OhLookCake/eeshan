@@ -6,7 +6,7 @@ export async function onRequest(context) {
   const projectMap = {
     'hodorle': 'hodorle.pages.dev',
     'vibewho': 'vibewho.pages.dev',
-    'startups': 'sagainsth.com',
+    'startups-against-humanity': 'startups-against-humanity.pages.dev',
     'letters-practice': 'letters-practice.pages.dev'
   };
 
