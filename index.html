@@ -6,7 +6,7 @@
     <title>eeshan's projects</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23222'/><text x='50' y='68' font-family='Georgia,serif' font-size='60' font-style='italic' fill='%23f5f5f5' text-anchor='middle'>e</text></svg>">
     <link rel="stylesheet" href="style.css">
-    <script>if(localStorage.getItem('theme')!=='light')document.documentElement.className='dark'</script>
+    <script>if(localStorage.getItem('theme-eeshan')!=='light')document.documentElement.className='dark'</script>
 </head>
 <body>
     <header>
@@ -14,7 +14,7 @@
         <nav>
             <button class="view-btn active" data-view="category">Category</button>
             <button class="view-btn" data-view="timeline">Timeline</button>
-            <button class="theme-btn" onclick="document.documentElement.classList.toggle('dark');var d=document.documentElement.classList.contains('dark');this.textContent=d?'light':'dark';localStorage.setItem('theme',d?'dark':'light')">dark</button>
+            <button class="theme-btn" onclick="document.documentElement.classList.toggle('dark');var d=document.documentElement.classList.contains('dark');this.textContent=d?'light':'dark';localStorage.setItem('theme-eeshan',d?'dark':'light')">dark</button>
         </nav>
     </header>
     <main id="projects"></main>
@@ -59,7 +59,7 @@
 
         buttons.forEach(function(b) { b.addEventListener('click', function() { setView(b.dataset.view); }); });
         setView('category');
-        if(localStorage.getItem('theme')!=='light') document.querySelector('.theme-btn').textContent='light';
+        if(localStorage.getItem('theme-eeshan')!=='light') document.querySelector('.theme-btn').textContent='light';
     </script>
     <script data-goatcounter="https://cakester.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
