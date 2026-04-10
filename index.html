@@ -36,7 +36,7 @@
             var sorted = projects.slice().sort(function(a, b) { return b.date.localeCompare(a.date); });
             container.innerHTML = '<ul class="timeline">' +
                 sorted.map(function(p) {
-                    return '<li><span class="date">' + p.date + '</span><a href="' + p.url + '">' + p.name + '</a><span class="byline">' + p.byline + '</span></li>';
+                    return '<li><span class="date">' + p.date + '</span><a href="' + p.url + '">' + p.name + '</a><a href="' + p.url + '" class="byline">' + p.byline + '</a></li>';
                 }).join('') + '</ul>';
         }
 
@@ -49,7 +49,7 @@
                 var items = groups[cat].slice().sort(function(a, b) { return b.date.localeCompare(a.date); });
                 return '<section><h2>' + cat + '</h2><ul class="category-list">' +
                     items.map(function(p) {
-                        return '<li><a href="' + p.url + '">' + p.name + '</a><span class="byline">' + p.byline + '</span></li>';
+                        return '<li><a href="' + p.url + '">' + p.name + '</a><a href="' + p.url + '" class="byline">' + p.byline + '</a></li>';
                     }).join('') + '</ul></section>';
             }).join('');
         }
