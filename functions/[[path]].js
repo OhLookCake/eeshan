@@ -8,7 +8,7 @@ export async function onRequest(context) {
     'vibewho': 'vibewho.pages.dev',
     'startups-against-humanity': 'startups-against-humanity.pages.dev',
     'letters-practice': 'letters-practice.pages.dev',
-    'things-in-rings': 'things-in-rings.pages.dev',
+    'venn-in-doubt': 'things-in-rings.pages.dev',
     'backtrack': 'backtrack-61p.pages.dev'
   };
 
