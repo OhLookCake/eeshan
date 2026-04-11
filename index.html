@@ -45,7 +45,16 @@
             projects.forEach(function(p) {
                 (groups[p.category] = groups[p.category] || []).push(p);
             });
-            container.innerHTML = Object.keys(groups).sort().map(function(cat) {
+            // Pin these categories to the top in this order; everything else follows alphabetically
+            var catOrder = ['social-games', '1p-games', 'silly'];
+            var cats = Object.keys(groups).sort().sort(function(a, b) {
+                var ai = catOrder.indexOf(a), bi = catOrder.indexOf(b);
+                if (ai !== -1 && bi !== -1) return ai - bi;
+                if (ai !== -1) return -1;
+                if (bi !== -1) return 1;
+                return a.localeCompare(b);
+            });
+            container.innerHTML = cats.map(function(cat) {
                 var items = groups[cat].slice().sort(function(a, b) { return b.date.localeCompare(a.date); });
                 return '<section><h2>' + cat + '</h2><ul class="category-list">' +
                     items.map(function(p) {
