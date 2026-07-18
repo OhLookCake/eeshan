@@ -11,7 +11,8 @@ export async function onRequest(context) {
     'venn-in-doubt': 'things-in-rings.pages.dev',
     'backtrack': 'backtrack-61p.pages.dev',
     '1d-chess': '1d-chess-960.pages.dev',
-    'frequency': 'frequency-3pc.pages.dev'
+    'frequency': 'frequency-3pc.pages.dev',
+    'jolie-guacamole': 'jolie-guacamole.pages.dev'
   };
 
   if (projectSlug && projectMap[projectSlug]) {
