@@ -12,7 +12,8 @@ export async function onRequest(context) {
     'backtrack': 'backtrack-61p.pages.dev',
     '1d-chess': '1d-chess-960.pages.dev',
     'frequency': 'frequency-3pc.pages.dev',
-    'jolie-guacamole': 'jolie-guacamole.pages.dev'
+    'jolie-guacamole': 'jolie-guacamole.pages.dev',
+    'cross-section': 'cross-section.pages.dev'
   };
 
   if (projectSlug && projectMap[projectSlug]) {
