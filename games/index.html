@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eeshan's games</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23222'/><text x='50' y='68' font-family='Georgia,serif' font-size='60' font-style='italic' fill='%23f5f5f5' text-anchor='middle'>e</text></svg>">
+    <link rel="stylesheet" href="/style.css">
+    <script>if(localStorage.getItem('theme-eeshan')!=='light')document.documentElement.className='dark'</script>
+</head>
+<body>
+    <a class="home-link" href="/">← home</a>
+    <header class="page-header">
+        <h1>eeshan's games</h1>
+            <button class="theme-btn" aria-label="Toggle colour theme"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    </header>
+    <main id="games"></main>
+    <script>
+        // Add games here: { name, url, date, category, byline }
+        var games = [
+            { name: "Vibe Who", url: "vibewho", date: "2026-03-24", category: "social-games", byline: "Guess who matches a vibe or stereotype" },
+            { name: "Startups Against Humanity", url: "startups-against-humanity", date: "2026-01-17", category: "social-games", byline: "Pitch terrible startups to attract imaginary capital" },
+            { name: "Hodorle", url: "hodorle", date: "2022-01-03", category: "1p-games", byline: "A word game in the loosest sense" },
+            { name: "Countdown Letters", url: "letters-practice", date: "2026-03-30", category: "1p-games", byline: "Practice tool for the Countdown letter game" },
+            { name: "Venn in Doubt", url: "venn-in-doubt", date: "2026-04-05", category: "social-games", byline: "Social deduction game with Venn diagrams" },
+            { name: "Backtrack", url: "backtrack", date: "2026-04-10", category: "social-games", byline: "Everything sounds better in esrever←" },
+            { name: "1D Chess", url: "1d-chess", date: "2026-04-15", category: "1p-games", byline: "When two dimensions is too many dimensions" },
+            { name: "Frequency", url: "frequency", date: "2026-04-28", category: "social-games", byline: "Everything is a spectrum, hone in on your team's frequency" },
+            { name: "Jolie Guacamole", url: "jolie-guacamole", date: "2026-07-16", category: "social-games", byline: "Rhyme time fame game" },
+            { name: "Cross Section", url: "cross-section", date: "2026-07-31", category: "1p-games", byline: "(Sort (the) words)" },
+        ];
+
+        var container = document.getElementById('games');
+        function renderCategory() {
+            var groups = {};
+            games.forEach(function(p) {
+                (groups[p.category] = groups[p.category] || []).push(p);
+            });
+            // Pin these categories to the top in this order; everything else follows alphabetically
+            var catOrder = ['social-games', '1p-games', 'silly'];
+            var cats = Object.keys(groups).sort().sort(function(a, b) {
+                var ai = catOrder.indexOf(a), bi = catOrder.indexOf(b);
+                if (ai !== -1 && bi !== -1) return ai - bi;
+                if (ai !== -1) return -1;
+                if (bi !== -1) return 1;
+                return a.localeCompare(b);
+            });
+            container.innerHTML = cats.map(function(cat) {
+                var items = groups[cat].slice().sort(function(a, b) { return b.date.localeCompare(a.date); });
+                return '<section><h2>' + cat + '</h2><ul class="category-list">' +
+                    items.map(function(p) {
+                        return '<li><a href="' + '/games/' + p.url + '">' + p.name + '</a><a href="' + '/games/' + p.url + '" class="byline">' + p.byline + '</a></li>';
+                    }).join('') + '</ul></section>';
+            }).join('');
+        }
+
+        renderCategory();
+    </script>
+    <script src="/theme.js"></script>
+    <script data-goatcounter="https://cakester.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,9 +1,11 @@
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const pathParts = url.pathname.split('/').filter(Boolean);
-  const projectSlug = pathParts[0];
+  const gameOffset = pathParts[0] === 'games' ? 1 : 0;
+  const gameSlug = pathParts[gameOffset];
+  const gameBase = `${gameOffset ? '/games' : ''}/${gameSlug}`;
 
-  const projectMap = {
+  const gameMap = {
     'hodorle': 'hodorle.pages.dev',
     'vibewho': 'vibewho.pages.dev',
     'startups-against-humanity': 'startups-against-humanity.pages.dev',
@@ -16,14 +18,14 @@ export async function onRequest(context) {
     'cross-section': 'cross-section.pages.dev'
   };
 
-  if (projectSlug && projectMap[projectSlug]) {
+  if (gameSlug && gameMap[gameSlug]) {
     // Force trailing slash redirect
-    if (url.pathname === `/${projectSlug}`) {
-      return Response.redirect(`${url.origin}/${projectSlug}/`, 301);
+    if (url.pathname === gameBase) {
+      return Response.redirect(`${url.origin}${gameBase}/${url.search}`, 301);
     }
 
-    const targetDomain = projectMap[projectSlug];
-    const remainingPath = '/' + pathParts.slice(1).join('/');
+    const targetDomain = gameMap[gameSlug];
+    const remainingPath = url.pathname.slice(gameBase.length);
     const targetUrl = new URL(remainingPath + url.search, `https://${targetDomain}`);
 
     // Clone headers to avoid mutating the original request
