@@ -2,10 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  font-size: 16px;
 }
 
 :root {
-    --bg: #f7f0ea;
+    --bg-light: #f7f0ea;
+    --bg-dark: #0f1520;
+    --bg: var(--bg-light);
+    --theme-toggle-fill: #223366;
     --text: #2a2220;
     --muted: #a08070;
     --border: #e4d6cc;
@@ -18,7 +22,8 @@
 }
 
 .dark {
-    --bg: #0f1520;
+    --bg: var(--bg-dark);
+    --theme-toggle-fill: #a08070;
     --text: #e8d8d0;
     --muted: #7a5e50;
     --border: #2e2220;
@@ -46,7 +51,7 @@ header {
 }
 
 h1 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 0.15em;
     text-transform: lowercase;
@@ -112,17 +117,16 @@ ul {
 a {
     color: var(--link);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     transition: color 0.2s;
 }
 
-a:hover:not(.byline) {
+a:hover {
     color: var(--link-hover);
-    text-decoration: underline;
 }
 
 h2 {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--muted);
     text-transform: lowercase;
@@ -138,7 +142,7 @@ section:first-child h2 {
 }
 
 .byline {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--muted);
     text-decoration: none;
 }
@@ -150,7 +154,7 @@ section:first-child h2 {
 
 .category-list .byline {
     display: block;
-    font-size: 0.9rem;
+    font-size: 1em;
     margin-top: 0.15rem;
 }
 
@@ -164,20 +168,24 @@ section:first-child h2 {
     margin-bottom: 0;
 }
 
+.home-page {
+    padding-top: 8rem;
+}
+
 .home-page .page-header {
-    margin-bottom: 6rem;
+    margin-bottom: 10rem;
 }
 
 .home-intro {
-    font-size: 0.9rem;
-    color: color-mix(in srgb, var(--text) 75%, var(--bg));
+    font-size: 1rem;
+    color: var(--text);
     line-height: 1.7;
     margin-bottom: 4rem;
 }
 
 #top-of-mind,
 #past-work {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 400;
     width: fit-content;
     letter-spacing: normal;
@@ -190,16 +198,8 @@ section:first-child h2 {
     padding-left: 1rem;
 }
 
-.home-list li {
-    border-bottom: 1px solid var(--border);
-}
-
-.home-list li:last-child {
-    border-bottom: none;
-}
-
 .home-list a {
-    font-size: 0.8rem;
+    font-size: 1rem;
     display: block;
     padding: 1rem 0;
     text-decoration: underline dotted;
@@ -209,6 +209,7 @@ section:first-child h2 {
 .home-list a:hover {
     text-decoration: underline dotted;
 }
+
 
 .home-link {
     display: inline-block;
@@ -239,6 +240,10 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 600px) {
     body {
         padding: 2.5rem 1.25rem;
+    }
+
+    .home-page {
+        padding-top: 3.5rem;
     }
 
     .category-list {
