@@ -63,7 +63,13 @@ nav {
     background: none;
     border: 1px solid var(--btn-border);
     color: var(--btn-text);
-    padding: 0.4rem 1rem;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
     font-family: inherit;
     font-size: 0.75rem;
     cursor: pointer;
@@ -78,8 +84,13 @@ nav {
 }
 
 .theme-btn {
-    border-radius: 3px;
+    border-radius: 50%;
     margin-left: auto;
+}
+
+.theme-btn svg {
+    width: 14px;
+    height: 14px;
 }
 
 ul {
@@ -153,8 +164,30 @@ section:first-child h2 {
     margin-bottom: 0;
 }
 
+.home-page .page-header {
+    margin-bottom: 6rem;
+}
+
+.home-intro {
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--text) 75%, var(--bg));
+    line-height: 1.7;
+    margin-bottom: 4rem;
+}
+
+#top-of-mind,
+#past-work {
+    font-size: 0.9rem;
+    font-weight: 400;
+    width: fit-content;
+    letter-spacing: normal;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
 .home-list {
     width: 100%;
+    padding-left: 1rem;
 }
 
 .home-list li {
@@ -166,8 +199,15 @@ section:first-child h2 {
 }
 
 .home-list a {
+    font-size: 0.8rem;
     display: block;
     padding: 1rem 0;
+    text-decoration: underline dotted;
+    text-underline-offset: 0.25em;
+}
+
+.home-list a:hover {
+    text-decoration: underline dotted;
 }
 
 .home-link {
