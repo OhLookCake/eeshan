@@ -5,7 +5,7 @@
 }
 
 :root {
-    font-size: 16px;
+    font-size: 14px;
     --bg-light: #f7f0ea;
     --bg-dark: #0f1520;
     --bg: var(--bg-light);
@@ -176,6 +176,7 @@ section:first-child h2 {
     width: fit-content;
     letter-spacing: normal;
     padding-bottom: 0;
+    padding-top: 1rem;
     border-bottom: none;
 }
 
