@@ -2,10 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  font-size: 16px;
 }
 
 :root {
+    font-size: 16px;
     --bg-light: #f7f0ea;
     --bg-dark: #0f1520;
     --bg: var(--bg-light);
@@ -40,14 +40,15 @@ body {
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 4rem 2rem;
+    padding: 8rem 2rem 4rem;
+    position: relative;
     max-width: 860px;
     margin: 0 auto;
     transition: background 0.3s, color 0.3s;
 }
 
 header {
-    margin-bottom: 4rem;
+    margin-bottom: 10rem;
 }
 
 h1 {
@@ -104,14 +105,9 @@ ul {
 
 .category-list li {
     display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--border);
-}
-
-.category-list li:last-child {
-    border-bottom: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 0;
 }
 
 a {
@@ -126,15 +122,13 @@ a:hover {
 }
 
 h2 {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 400;
     color: var(--muted);
     text-transform: lowercase;
-    letter-spacing: 0.15em;
+    letter-spacing: normal;
     margin-top: 2.5rem;
     margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
 }
 
 section:first-child h2 {
@@ -149,7 +143,7 @@ section:first-child h2 {
 
 
 .category-list {
-    padding-left: 1.5rem;
+    padding-left: 1rem;
 }
 
 .category-list .byline {
@@ -166,14 +160,6 @@ section:first-child h2 {
 
 .page-header h1 {
     margin-bottom: 0;
-}
-
-.home-page {
-    padding-top: 8rem;
-}
-
-.home-page .page-header {
-    margin-bottom: 10rem;
 }
 
 .home-intro {
@@ -210,21 +196,28 @@ section:first-child h2 {
     text-decoration: underline dotted;
 }
 
+.category-list a:not(.byline),
+.project-intro a {
+    text-decoration: underline dotted;
+    text-underline-offset: 0.25em;
+}
+
 
 .home-link {
     display: inline-block;
-    margin-bottom: 2rem;
+    position: absolute;
+    top: 4.5rem;
     font-size: 0.75rem;
     color: var(--muted);
 }
 
 .placeholder {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--muted);
 }
 
 .project-intro {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.7;
 }
 
@@ -239,19 +232,10 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 600px) {
     body {
-        padding: 2.5rem 1.25rem;
+        padding: 3.5rem 1.25rem 2.5rem;
     }
 
-    .home-page {
-        padding-top: 3.5rem;
-    }
-
-    .category-list {
-        padding-left: 0;
-    }
-
-    .category-list li {
-        flex-direction: column;
-        gap: 0.25rem;
+    .home-link {
+        top: 1.25rem;
     }
 }
