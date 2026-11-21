@@ -15,21 +15,36 @@
     </header>
     <main>
         <p class="home-intro">A place to keep track of what I’m making, trying, and thinking about. Mostly for my own record, but you’re welcome to look around.</p>
-        <section aria-labelledby="top-of-mind">
-            <h2 id="top-of-mind">stuff that's top of my mind</h2>
-            <ul class="home-list">
-                <li><a href="https://benchmarkbench.pages.dev">BenchmarkBench</a></li>
-                <li><a href="https://github.com/OhLookCake/cadence">Cadence</a></li>
-                <li><a href="https://viberuary.pages.dev">Viberuary</a></li>
-            </ul>
-        </section>
-        <section aria-labelledby="past-work">
-            <h2 id="past-work">stuff I've made in the past. in no particular order</h2>
-            <ul class="home-list">
-                <li><a href="https://github.com/OhLookCake">Github</a></li>
-            </ul>
-        </section>
+        <ul id="projects" class="category-list"></ul>
     </main>
+    <script>
+        // Add projects here: { name, url, tags: ["tag-name"] }
+        var projects = [
+            { name: "BenchmarkBench", url: "https://benchmarkbench.pages.dev", tags: ["AI", "LLM", "benchmarks"] },
+            { name: "Cadence", url: "https://github.com/OhLookCake/cadence", tags: ["MacOS", "utility", "scheduling"] },
+            { name: "Viberuary", url: "https://viberuary.pages.dev", tags: ["AI", "vibe-coding"] },
+            { name: "Jolie Guacamole", url: "games/jolie-guacamole", tags: ["games", "social-games"] },
+            { name: "Frequency", url: "games/frequency", tags: ["games", "social-games"] },
+            { name: "Backtrack", url: "games/backtrack", tags: ["games", "social-games"] },
+            { name: "Venn in Doubt", url: "games/venn-in-doubt", tags: ["games", "social-games"] },
+            { name: "Vibe Who", url: "games/vibewho", tags: ["games", "social-games"] },
+            { name: "Startups Against Humanity", url: "games/startups-against-humanity", tags: ["games", "social-games"] },
+            { name: "Cross Section", url: "games/cross-section", tags: ["games", "1p-games"] },
+            { name: "1D Chess", url: "games/1d-chess", tags: ["games", "1p-games"] },
+            { name: "Countdown Letters", url: "games/letters-practice", tags: ["games", "1p-games"] },
+            { name: "Hodorle", url: "games/hodorle", tags: ["games", "1p-games"] },
+        ];
+
+        var container = document.getElementById('projects');
+        projects.forEach(function(project) {
+            var item = document.createElement('li');
+            var link = document.createElement('a');
+            link.href = project.url;
+            link.textContent = project.name;
+            item.appendChild(link);
+            container.appendChild(item);
+        });
+    </script>
     <script src="theme.js"></script>
     <script data-goatcounter="https://cakester.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
