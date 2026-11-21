@@ -169,6 +169,34 @@ section:first-child h2 {
     margin-bottom: 4rem;
 }
 
+.project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-filters button {
+    background: none;
+    border: 1px solid var(--btn-border);
+    border-radius: 3px;
+    color: var(--text);
+    font: inherit;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+}
+
+.project-filters button:hover {
+    border-color: var(--link);
+}
+
+.project-filters button[aria-pressed="true"] {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+}
+
 #top-of-mind,
 #past-work {
     font-size: 1rem;

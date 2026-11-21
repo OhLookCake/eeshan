@@ -15,7 +15,8 @@
     </header>
     <main>
         <p class="home-intro">A place to keep track of what I’m making, trying, and thinking about. Mostly for my own record, but you’re welcome to look around.</p>
-        <ul id="projects" class="category-list"></ul>
+        <div id="project-filters" class="project-filters" role="group" aria-label="Filter projects by tag"></div>
+        <ul id="projects" class="category-list" aria-live="polite"></ul>
     </main>
     <script>
         // Add projects here: { name, url, tags: ["tag-name"] }
@@ -36,14 +37,40 @@
         ];
 
         var container = document.getElementById('projects');
-        projects.forEach(function(project) {
-            var item = document.createElement('li');
-            var link = document.createElement('a');
-            link.href = project.url;
-            link.textContent = project.name;
-            item.appendChild(link);
-            container.appendChild(item);
+        var filters = document.getElementById('project-filters');
+        var filterTags = ['AI', 'LLM', 'MacOS', 'utility', 'vibe-coding', 'games', 'social-games', '1p-games'];
+
+        function renderProjects(tag) {
+            container.replaceChildren();
+            projects.filter(function(project) {
+                return tag === null || project.tags.includes(tag);
+            }).forEach(function(project) {
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = project.url;
+                link.textContent = project.name;
+                item.appendChild(link);
+                container.appendChild(item);
+            });
+        }
+
+        [null].concat(filterTags).forEach(function(tag) {
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = tag === null ? 'All' : tag;
+            button.setAttribute('aria-pressed', String(tag === null));
+            button.addEventListener('click', function() {
+                var selectedTag = button.getAttribute('aria-pressed') === 'true' ? null : tag;
+                filters.querySelectorAll('button').forEach(function(filter) {
+                    var selectedButton = selectedTag === null ? filters.firstElementChild : button;
+                    filter.setAttribute('aria-pressed', String(filter === selectedButton));
+                });
+                renderProjects(selectedTag);
+            });
+            filters.appendChild(button);
         });
+
+        renderProjects(null);
     </script>
     <script src="theme.js"></script>
     <script data-goatcounter="https://cakester.goatcounter.com/count"
